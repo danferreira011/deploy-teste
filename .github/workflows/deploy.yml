@@ -1,0 +1,24 @@
+name: Deploy Fake com Secret
+on:
+    workflow_call:
+        # secrets:
+        #     ambiente:
+        #         required: true
+        #         description: "Ambiente do deploy"
+jobs:
+    deploy-to-k8s:
+        runs-on: ubuntu-latest  
+        steps:
+            # - name: Deploy no ambiente
+            #   run: echo "Executando o deploy no ambiente de S{{secrets.ambiente}}"
+
+            - name: Deploy no ambiente
+              run: echo "Executando o deploy no ambiente de ${{secrets.AMBIENTE_ENTREGA}}"
+
+            # passagem por parametro
+            # - name: Curl Deploy no ambiente
+            #   run: "curl -X POST https://webhook.site/94273afc-c964-4465-a01f-564881199502 -d '{ambiente:S{{secrets.ambiente}}}'"
+
+            # passagem por herança
+            - name: Curl Deploy no ambiente
+              run: "curl -X POST https://webhook.site/94273afc-c964-4465-a01f-564881199502 -d '{ambiente:${{secrets.AMBIENTE_ENTREGA}}}'"
